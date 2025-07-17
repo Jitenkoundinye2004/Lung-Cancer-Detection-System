@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - Lung Cancer Detection</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --primary-hover: #0056b3;
+      --light-bg: #f8f9fa;
+      --text-color: #333;
+      --danger-color: #dc3545;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--light-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--text-color);
+    }
+    .register-container {
+      max-width: 900px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .register-form {
+      padding: 50px;
+    }
+    .register-info {
+      background: linear-gradient(45deg, var(--primary-hover), var(--primary-color));
+      color: white;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .register-info h2 {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .form-control {
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+    }
+    .btn-primary {
+      background: var(--primary-color);
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .text-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .text-link:hover {
+      text-decoration: underline;
+    }
+    .invalid-feedback {
+        display: none; /* Hide by default, show with JS */
+        color: var(--danger-color);
+        font-size: 0.875em;
+    }
+     @media (max-width: 768px) {
+      .register-container {
+        grid-template-columns: 1fr;
+      }
+      .register-info {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <div class="register-info">
+      <h2>Join Our Platform</h2>
+      <p>Access our advanced AI tools for lung cancer analysis and contribute to early detection efforts.</p>
+    </div>
+    <div class="register-form">
+      <h3 class="text-center mb-4 fw-bold" style="color: var(--primary-color);">Create an Account</h3>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ 'danger' if category == 'error' or category == 'danger' else category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <form id="registrationForm" method="POST" action="/register" novalidate>
+        <div class="mb-3">
+          <label for="fullname" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="fullname" name="fullname" required placeholder="Your full name">
+          <div class="invalid-feedback" id="nameError">Full name can only contain letters and spaces.</div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email">
+           <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required placeholder="Create password">
+          <div class="invalid-feedback" id="passwordError">
+              Password must meet the following criteria:
+              <ul>
+                  <li id="pw-length">At least 8 characters long</li>
+                  <li id="pw-lower">Contains a lowercase letter</li>
+                  <li id="pw-upper">Contains an uppercase letter</li>
+                  <li id="pw-number">Contains a number</li>
+                  <li id="pw-special">Contains a special character (!@#$%^&*)</li>
+              </ul>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="confirm_password" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
+           <div class="invalid-feedback" id="confirmPasswordError">Passwords do not match.</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+        <p class="mt-3 text-center">Already have an account? <a href="{{ url_for('login') }}" class="text-link">Login here</a></p>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        const form = event.target;
+        let isFormValid = true;
+
+        // --- Clear previous errors ---
+        form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+        form.querySelectorAll('.invalid-feedback').forEach(el => el.style.display = 'none');
+
+        // --- Full Name Validation ---
+        const fullname = document.getElementById('fullname');
+        const nameError = document.getElementById('nameError');
+        if (!/^[A-Za-z\s]+$/.test(fullname.value)) {
+            fullname.classList.add('is-invalid');
+            nameError.style.display = 'block';
+            isFormValid = false;
+        }
+
+        // --- Password Live Validation ---
+        const password = document.getElementById('password');
+        const passwordError = document.getElementById('passwordError');
+        let isPasswordValid = true;
+
+        // Check length
+        if (password.value.length < 8) {
+            document.getElementById('pw-length').style.color = 'var(--danger-color)'; isPasswordValid = false;
+        } else { document.getElementById('pw-length').style.color = 'green'; }
+        // Check lowercase
+        if (!/[a-z]/.test(password.value)) {
+            document.getElementById('pw-lower').style.color = 'var(--danger-color)'; isPasswordValid = false;
+        } else { document.getElementById('pw-lower').style.color = 'green'; }
+        // Check uppercase
+        if (!/[A-Z]/.test(password.value)) {
+            document.getElementById('pw-upper').style.color = 'var(--danger-color)'; isPasswordValid = false;
+        } else { document.getElementById('pw-upper').style.color = 'green'; }
+        // Check number
+        if (!/\d/.test(password.value)) {
+            document.getElementById('pw-number').style.color = 'var(--danger-color)'; isPasswordValid = false;
+        } else { document.getElementById('pw-number').style.color = 'green'; }
+        // Check special character
+        if (!/[!@#$%^&*]/.test(password.value)) {
+            document.getElementById('pw-special').style.color = 'var(--danger-color)'; isPasswordValid = false;
+        } else { document.getElementById('pw-special').style.color = 'green'; }
+        
+        if (!isPasswordValid) {
+            password.classList.add('is-invalid');
+            passwordError.style.display = 'block';
+            isFormValid = false;
+        }
+
+        // --- Confirm Password Validation ---
+        const confirmPassword = document.getElementById('confirm_password');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        if (password.value !== confirmPassword.value) {
+            confirmPassword.classList.add('is-invalid');
+            confirmPasswordError.style.display = 'block';
+            isFormValid = false;
+        }
+
+        // --- Prevent form submission if invalid ---
+        if (!isFormValid || !form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Our Technology - Lung Cancer Detection</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <style>
+    :root {
+      --primary-color: #0d6efd;
+      --primary-gradient: linear-gradient(45deg, #0d6efd, #0056b3);
+      --light-bg: #f8f9fa;
+      --text-dark: #343a40;
+      --text-muted: #6c757d;
+      --border-color: #e9ecef;
+    }
+    body {
+      background-color: var(--light-bg);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    /* Hero Section */
+    .about-hero {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+    }
+    .about-hero h1 {
+      font-weight: 700;
+      font-size: 3rem;
+    }
+    .about-hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    /* Content Section */
+    .content-section {
+      padding: 80px 0;
+    }
+    .section-title {
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .cancer-type-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .cancer-type-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+    .cancer-type-card img {
+      height: 250px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .cancer-type-card .card-body {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .cancer-type-card h3 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    /* New Formatted Info Block */
+    .info-block {
+      margin-top: auto; /* Pushes the block to the bottom if content is short */
+    }
+    .info-item {
+        display: flex;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .info-item:last-child {
+        border-bottom: none;
+    }
+    .info-label {
+        font-weight: 600;
+        color: var(--text-dark);
+        width: 110px; /* Aligns the labels */
+        flex-shrink: 0;
+    }
+    .info-value {
+        color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#" style="color: var(--primary-color);">LungCancer AI</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav fw-semibold">
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{{ url_for('about') }}">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('history') }}">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}"><i class="bi bi-box-arrow-right me-1"></i>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="about-hero">
+      <div class="container" data-aos="fade-in">
+          <h1>Understanding Lung Cancer</h1>
+          <p class="lead">Our AI model is trained to identify various types of lung cancer from CT scans, aiding in early and accurate diagnosis. Learn more about the types we classify below.</p>
+      </div>
+  </header>
+
+  <section class="content-section">
+      <div class="container">
+          <h2 class="section-title">Types of Non-Small Cell Lung Cancer (NSCLC)</h2>
+          <div class="row">
+              <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                  <div class="cancer-type-card">
+                      <img src="{{ url_for('static', filename='images/adenocarcinoma.jpg') }}" alt="Adenocarcinoma">
+                      <div class="card-body">
+                          <h3>Adenocarcinoma</h3>
+                          <div class="info-block">
+                              <div class="info-item">
+                                  <span class="info-label">Type</span>
+                                  <span class="info-value">NSCLC</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Prevalence</span>
+                                  <span class="info-value">Most common type, especially in non-smokers.</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Origin</span>
+                                  <span class="info-value">Glandular cells in outer lung parts.</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Growth</span>
+                                  <span class="info-value">Tends to be slower than other types.</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                  <div class="cancer-type-card">
+                      <img src="{{ url_for('static', filename='images/largecell.png') }}" alt="Large Cell Carcinoma">
+                      <div class="card-body">
+                          <h3>Large Cell Carcinoma</h3>
+                           <div class="info-block">
+                              <div class="info-item">
+                                  <span class="info-label">Type</span>
+                                  <span class="info-value">NSCLC</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Prevalence</span>
+                                  <span class="info-value">Less common, but very aggressive.</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Origin</span>
+                                  <span class="info-value">Can occur in any part of the lung.</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Growth</span>
+                                  <span class="info-value">Grows and spreads quickly.</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+                  <div class="cancer-type-card">
+                      <img src="{{ url_for('static', filename='images/squamous.png') }}" alt="Squamous Cell Carcinoma">
+                      <div class="card-body">
+                          <h3>Squamous Cell Carcinoma</h3>
+                           <div class="info-block">
+                              <div class="info-item">
+                                  <span class="info-label">Type</span>
+                                  <span class="info-value">NSCLC</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Prevalence</span>
+                                  <span class="info-value">Strongly linked to a history of smoking.</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Origin</span>
+                                  <span class="info-value">Flat cells lining the central airways.</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Growth</span>
+                                  <span class="info-value">Moderate, may form cavities in the lung.</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <h2 class="section-title mt-5">Control Group</h2>
+           <div class="row justify-content-center">
+                <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                  <div class="cancer-type-card">
+                      <img src="{{ url_for('static', filename='images/normal.png') }}" alt="Normal Lung">
+                      <div class="card-body">
+                          <h3>Normal (Healthy)</h3>
+                           <div class="info-block">
+                              <div class="info-item">
+                                  <span class="info-label">Meaning</span>
+                                  <span class="info-value">Represents healthy tissue with no signs of tumors.</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Use Case</span>
+                                  <span class="info-value">Serves as the baseline control for model training.</span>
+                              </div>
+                              <div class="info-item">
+                                  <span class="info-label">Appearance</span>
+                                  <span class="info-value">Shows clear alveolar structures and no anomalies.</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+           </div>
+      </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+      AOS.init({
+          duration: 800,
+          once: true
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Lung Cancer Detection</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --primary-hover: #0056b3;
+      --light-bg: #f8f9fa;
+      --text-color: #333;
+      --danger-color: #dc3545;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--light-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--text-color);
+    }
+    .login-container {
+      max-width: 900px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .login-form {
+      padding: 50px;
+    }
+    .login-info {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .login-info h2 {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .form-control {
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+    }
+    .btn-primary {
+      background: var(--primary-color);
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .text-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .text-link:hover {
+      text-decoration: underline;
+    }
+    .invalid-feedback {
+        display: none; /* Hide by default, show with JS */
+    }
+    .form-control.is-invalid {
+        border-color: var(--danger-color);
+    }
+    .form-control.is-invalid:focus {
+        box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+    }
+    @media (max-width: 768px) {
+      .login-container {
+        grid-template-columns: 1fr;
+      }
+      .login-info {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-form">
+      <h3 class="text-center mb-4 fw-bold" style="color: var(--primary-color);">Login to Your Account</h3>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == 'login' or category == 'danger' %}
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <form id="loginForm" method="POST" action="{{ url_for('login') }}" novalidate>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+          <div class="invalid-feedback">Please enter your email address.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+          <div class="invalid-feedback">Please enter your password.</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Login</button>
+      </form>
+      <div class="text-center mt-4">
+        <span>Don't have an account? <a href="{{ url_for('register') }}" class="text-link">Register here</a></span>
+      </div>
+    </div>
+    <div class="login-info">
+      <h2>Early Detection Matters</h2>
+      <p>Harnessing the power of AI to provide fast and reliable lung cancer diagnosis from CT scans.</p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        const form = event.target;
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+
+        // Reset previous invalid states
+        email.classList.remove('is-invalid');
+        password.classList.remove('is-invalid');
+        
+        let isValid = true;
+
+        // Check if email is empty
+        if (email.value.trim() === '') {
+            email.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        // Check if password is empty
+        if (password.value.trim() === '') {
+            password.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Stop form submission if any field is invalid
+        }
+    });
+  </script>
+</body>
+</html>
