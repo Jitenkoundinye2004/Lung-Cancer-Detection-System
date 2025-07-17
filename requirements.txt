@@ -1,0 +1,11 @@
+Flask
+pymongo
+tensorflow
+scikit-learn
+joblib
+opencv-python
+scipy
+werkzeug
+numpy
+fpdf
+Flask-Mail
