@@ -37,9 +37,13 @@ This web application leverages a deep learning model to analyze chest CT scans a
 ## 📸 Screenshots
 
 Here are a few screenshots of the application in action.
-| Login Page | Analysis Page | Patient History |
+Home Page | Login Page | Signup Page |
 | :---: | :---: | :---: |
-| ![Login Page Screenshot](./images/login.png) | ![Analysis Page Screenshot](./images/prediction.png) | ![History Page Screenshot](./images/history.png) |
+![Home Page Screenshot](./images/homepage.png) | ![Login Page Screenshot](./images/login.png) | ![Analysis Page Screenshot](./images/signup.png) |
+
+| Analysis Page | Contact Page | Patient History |
+| :---: | :---: | :---: |
+| ![History Page Screenshot](./images/patient.png)  | ![Contact Page Screenshot](./images/contact.png) | ![History Page Screenshot](./images/history.png) |
 
 
 ## 📋 Prerequisites
