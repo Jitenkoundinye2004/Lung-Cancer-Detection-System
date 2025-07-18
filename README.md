@@ -33,6 +33,14 @@ This web application leverages a deep learning model to analyze chest CT scans a
 - **Deployment & Others:**
     - **PDF Generation:** PyFPDF
     - **Email Service:** Flask-Mail (with Gmail SMTP)
+    
+## 📸 Screenshots
+
+Here are a few screenshots of the application in action.
+| Login Page | Analysis Page | Patient History |
+| :---: | :---: | :---: |
+| ![Login Page Screenshot](./screenshots/login-page.png) | ![Analysis Page Screenshot](./screenshots/analysis-page.png) | ![History Page Screenshot](./screenshots/history-page.png) |
+
 
 ## 📋 Prerequisites
 
