@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - Lung Cancer Detection</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <style>
+    body {
+      /* background: linear-gradient(to right, #e0f7fa, #f1f8e9); */
+      /* background-image: url("https://emag.medicalexpo.com/wp-content/uploads/sites/9/AI_Lung_Cancer_AdobeStock.jpg");
+      background-size: cover;
+      background-repeat: no-repeat; */
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section {
+      padding: 60px 0;
+    }
+    .lung-img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    h2, h3 {
+      color: #007bff;
+    }
+    .navbar-brand img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    
+  </style>
+</head>
+<body>
+
+ <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <span class="fw-bold text-primary">LungCancer</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav me-3">
+          <li class="nav-item">
+            <a class="nav-link active text-primary fw-semibold" href="{{ url_for('index') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-primary fw-semibold" href="{{ url_for('about') }}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-primary fw-semibold" href="{{ url_for('contact') }}">Contact</a>
+          </li>
+            <li class="nav-item">
+          <a class="nav-link text-primary fw-semibold" href="{{ url_for('history') }}">History</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link text-primary fw-semibold" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container info-section">
+
+    <!-- Adenocarcinoma -->
+    <div class="row mb-5">
+      <div class="col-md-6" style="margin-top: 50px;">
+        <img src="{{ url_for('static', filename='images/adenocarcinoma.jpg') }}" alt="Adenocarcinoma" class="lung-img">
+      </div>
+      <div class="col-md-6" style="margin-top: 50px;">
+        <h3>Adenocarcinoma</h3>
+        <p><strong>Type:</strong> Non-Small Cell Lung Cancer (NSCLC)</p>
+        <p><strong>Prevalence:</strong> Most common type of lung cancer in non-smokers, but also found in smokers.</p>
+        <p><strong>Origin:</strong> Begins in the glandular (mucus-secreting) cells lining the outer parts of the lungs.</p>
+        <p><strong>Growth Rate:</strong> Slower than other lung cancers.</p>
+        <p><strong>Metastasis Sites:</strong> Brain, bones, liver, and adrenal glands.</p>
+        <p><strong>Symptoms:</strong> Persistent cough, shortness of breath, chest pain, fatigue.</p>
+      </div>
+    </div>
+
+    <!-- Large Cell Carcinoma -->
+    <div class="row mb-5">
+      <div class="col-md-6 order-md-2">
+        <img src="{{ url_for('static', filename='images/largecell.png') }}" alt="Large Cell Carcinoma" class="lung-img">
+      </div>
+      <div class="col-md-6 order-md-1">
+        <h3>Large Cell Carcinoma</h3>
+        <p><strong>Type:</strong> Non-Small Cell Lung Cancer (NSCLC)</p>
+        <p><strong>Prevalence:</strong> Less common but very aggressive.</p>
+        <p><strong>Origin:</strong> Can occur in any part of the lung and tends to grow and spread quickly.</p>
+        <p><strong>Subtypes:</strong> Sometimes includes large cell neuroendocrine carcinoma.</p>
+        <p><strong>Symptoms:</strong> Rapid weight loss, chest discomfort, hoarseness, coughing up blood.</p>
+      </div>
+    </div>
+
+    <!-- Squamous Cell Carcinoma -->
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <img src="{{ url_for('static', filename='images/squamous.png') }}" alt="Squamous Cell Carcinoma" class="lung-img">
+      </div>
+      <div class="col-md-6">
+        <h3>Squamous Cell Carcinoma</h3>
+        <p><strong>Type:</strong> Non-Small Cell Lung Cancer (NSCLC)</p>
+        <p><strong>Prevalence:</strong> Strongly associated with smoking.</p>
+        <p><strong>Origin:</strong> Arises in the flat cells lining the airways, usually near the central bronchial tubes.</p>
+        <p><strong>Growth Rate:</strong> Moderate; can form cavities in the lung.</p>
+        <p><strong>Symptoms:</strong> Cough with phlegm, wheezing, frequent respiratory infections, chest pain.</p>
+      </div>
+    </div>
+
+    <!-- Normal -->
+    <div class="row mb-5">
+      <div class="col-md-6 order-md-2">
+        <img src="{{ url_for('static', filename='images/normal.png') }}" alt="Normal Lung Tissue" class="lung-img">
+      </div>
+      <div class="col-md-6 order-md-1">
+        <h3>Normal</h3>
+        <p><strong>Meaning:</strong> Images in this class represent healthy lung tissue.</p>
+        <p><strong>Use Case:</strong> Used as control data for model training and comparison.</p>
+        <p><strong>Appearance:</strong> Clear alveolar structures, no signs of tumor mass or cellular anomalies.</p>
+      </div>
+    </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

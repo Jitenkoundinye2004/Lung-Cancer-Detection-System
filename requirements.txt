@@ -1,0 +1,14 @@
+# requirements.txt
+
+Flask
+numpy
+opencv-python
+tensorflow-cpu
+scikit-learn
+joblib
+scipy
+pymongo
+python-dotenv
+seaborn
+matplotlib
+gunicorn
