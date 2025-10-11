@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+static/uploads/
+model/
+archive/
+*.log
